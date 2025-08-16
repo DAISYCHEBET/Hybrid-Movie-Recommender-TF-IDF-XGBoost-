@@ -1,38 +1,68 @@
-# Hybrid Movie Recommendation System
+This project is a Hybrid Movie Recommender that combines content-based filtering using TF-IDF Vectorization with a machine learning classifier (XGBoost) to provide personalized movie suggestions. The dataset used for training was scraped from the OMDb API, containing key movie attributes such as title, genre, plot, director, actors, and IMDb ratings.
 
-This project is a movie recommendation system that combines content-based features and machine learning classification to predict and recommend movies. Using data scraped from the OMDb API, the system leverages TF-IDF vectorization to transform textual metadata into numerical features, and an XGBoost classifier to predict movie preferences.
+The goal of the project is to leverage both the semantic similarity of movie descriptions (via TF-IDF) and predictive modeling (via XGBoost) to recommend movies that closely align with user preferences.
 
-The project demonstrates how natural language processing and machine learning can be integrated for building recommendation systems.
+📖 Project Description
 
-📊Data Collection & Preprocessing
+Movie recommendation systems are widely used by streaming platforms to enhance user experience. Traditional recommendation systems are either:
+Content-based: Recommend movies similar to what a user has already liked, based on metadata (plot, genre, etc.)
+Collaborative filtering: Recommend movies based on patterns of user behavior and preferences.
+This project introduces a hybrid approach:
 
-Movie metadata was scraped using the OMDb API.
+Scraping Movie Data
 
-Textual features (e.g., plot summaries, genres, keywords) were transformed into numerical vectors using TF-IDF (Term Frequency–Inverse Document Frequency).
+Movie details were collected from the OMDb API.
 
-The processed data was then used to train and evaluate the model.
+The dataset includes fields like Title, Year, Genre, Plot, Director, Actors, IMDb Rating, etc.
 
-🤖Model Training
+Text Preprocessing
 
-XGBoost Classifier was used for classification.
+Movie plots and metadata were cleaned and normalized.
 
-A custom threshold of 0.6 was applied to balance precision and recall.
+Stopwords were removed and text was transformed into numerical vectors.
 
-The model was trained on the processed dataset and evaluated using classification metrics.
+Feature Extraction (TF-IDF)
 
-📈 Model Evaluation
-Classification Report (Threshold = 0.6)
-Class	Precision	Recall	F1-Score	Support
-0 (Not Recommended)	0.84	0.80	0.82	46
-1 (Recommended)	0.67	0.72	0.69	25
+TF-IDF (Term Frequency – Inverse Document Frequency) was used to convert movie descriptions into vectorized form.
 
-Accuracy: 0.77
-Macro Avg F1-Score: 0.76
-Weighted Avg F1-Score: 0.78
+This allowed the system to measure semantic similarity between different movies.
 
-Confusion Matrix
-[[37   9]
- [ 7  18]]
+Model Training (XGBoost Classifier)
+
+An XGBoost classifier was trained on the vectorized dataset to learn patterns in user preferences.
+
+The model predicts whether a user is likely to enjoy a movie based on extracted features.
+
+Hybrid Recommendation
+
+Movies are ranked based on both cosine similarity (TF-IDF) and model predictions (XGBoost).
+
+This ensures recommendations are not only similar in description but also optimized by learned patterns.
+
+
+🚀 Project Workflow
+
+Data Scraping → Movie data fetched from OMDb API.
+
+Preprocessing → Cleaning and preparing metadata (plots, genres, actors).
+
+TF-IDF Vectorization → Converting text into numerical feature vectors.
+
+Model Training (XGBoost) → Training and evaluating the classifier.
+
+Recommendation Engine → Hybrid approach using TF-IDF + XGBoost for final recommendations.
+
+🔑 Key Features
+
+Uses real-world movie metadata scraped from OMDb.
+
+TF-IDF captures semantic similarity between movie descriptions.
+
+XGBoost classifier improves prediction accuracy.
+
+Hybrid recommendation balances content similarity and machine learning predictions.
+
+Exploratory Data Analysis (EDA) with visual insights on the dataset.
 
 
 📌Interpretation:
@@ -57,6 +87,9 @@ xgboost → Machine learning classifier
 ⚙️Requirements
 
 You can then install dependencies with:
-
 pip install -r requirements.txt
 
+
+📈 Future Improvements
+
+Deploy the recommendation engine with FastAPI/Streamlit.
