@@ -1,12 +1,17 @@
-This project is a Hybrid Movie Recommender that combines content-based filtering using TF-IDF Vectorization with a machine learning classifier (XGBoost) to provide personalized movie suggestions. The dataset used for training was scraped from the OMDb API, containing key movie attributes such as title, genre, plot, director, actors, and IMDb ratings.
+🎬 Hybrid Movie Recommendation System (FastAPI + XGBoost + TF-IDF)
 
-The goal of the project is to leverage both the semantic similarity of movie descriptions (via TF-IDF) and predictive modeling (via XGBoost) to recommend movies that closely align with user preferences.
+This project is a Hybrid Movie Recommender that combines content-based filtering using TF-IDF Vectorization with a machine learning classifier (XGBoost) to provide personalized movie suggestions. The dataset used for training was scraped from the OMDb API, containing key attributes such as title, genre, plot, director, actors, and IMDb ratings.
+
+The goal of this project is to leverage both the semantic similarity of movie descriptions (via TF-IDF) and predictive modeling (via XGBoost) to recommend movies that closely align with user preferences. It also includes a FastAPI-powered backend to serve recommendations through a RESTful API.
 
 📖 Project Description
 
-Movie recommendation systems are widely used by streaming platforms to enhance user experience. Traditional recommendation systems are either:
-Content-based: Recommend movies similar to what a user has already liked, based on metadata (plot, genre, etc.)
-Collaborative filtering: Recommend movies based on patterns of user behavior and preferences.
+Movie recommendation systems are widely used by streaming platforms to enhance user experience. Traditional systems are typically:
+
+Content-based: Recommend movies similar to those a user has already liked, based on metadata (plot, genre, etc.).
+
+Collaborative filtering: Recommend movies based on user behavior and preference patterns.
+
 This project introduces a hybrid approach:
 
 Scraping Movie Data
@@ -19,13 +24,13 @@ Text Preprocessing
 
 Movie plots and metadata were cleaned and normalized.
 
-Stopwords were removed and text was transformed into numerical vectors.
+Stopwords were removed, and text was transformed into numerical vectors.
 
 Feature Extraction (TF-IDF)
 
-TF-IDF (Term Frequency – Inverse Document Frequency) was used to convert movie descriptions into vectorized form.
+TF-IDF (Term Frequency – Inverse Document Frequency) converts movie descriptions into vectorized form.
 
-This allowed the system to measure semantic similarity between different movies.
+This enables the system to measure semantic similarity between different movies.
 
 Model Training (XGBoost Classifier)
 
@@ -35,9 +40,10 @@ The model predicts whether a user is likely to enjoy a movie based on extracted 
 
 Hybrid Recommendation
 
-Movies are ranked based on both cosine similarity (TF-IDF) and model predictions (XGBoost).
+Movies are ranked using both cosine similarity (TF-IDF) and model predictions (XGBoost).
 
-This ensures recommendations are not only similar in description but also optimized by learned patterns.
+This ensures recommendations are both semantically similar and machine learning optimized.
+
 
 
 🚀 Project Workflow
@@ -50,30 +56,62 @@ TF-IDF Vectorization → Converting text into numerical feature vectors.
 
 Model Training (XGBoost) → Training and evaluating the classifier.
 
+API Deployment → Exposing the recommendation engine via FastAPI.
+
 Recommendation Engine → Hybrid approach using TF-IDF + XGBoost for final recommendations.
+
+
+🌐 FastAPI Backend
+
+This project includes a FastAPI-based API that allows you to query movie recommendations.
+
+Key Endpoints
+
+GET / – Welcome message & usage guide.
+
+GET /recommend?title=MovieTitle – Returns top 10 similar movies based on the provided title.
+
+
+
+Running the FastAPI Server
+uvicorn app2:app --reload
+
+
+Base URL: http://127.0.0.1:8000
+
+Swagger Docs: http://127.0.0.1:8000/docs
+
+Redoc: http://127.0.0.1:8000/redoc
+
+
 
 🔑 Key Features
 
-Uses real-world movie metadata scraped from OMDb.
+Real-world movie metadata scraped from OMDb.
 
 TF-IDF captures semantic similarity between movie descriptions.
 
 XGBoost classifier improves prediction accuracy.
 
-Hybrid recommendation balances content similarity and machine learning predictions.
+FastAPI backend enables easy integration with web or mobile apps.
 
-Exploratory Data Analysis (EDA) with visual insights on the dataset.
+Swagger & ReDoc documentation for easy testing.
+
+Exploratory Data Analysis (EDA) included for insights.
 
 
-📌Interpretation:
 
-The model achieved a good balance between precision and recall.
+📌 Interpretation
 
-It correctly identified 37 non-recommended movies and 18 recommended movies, with some trade-offs in misclassifications.
+The model achieved a good balance between precision and recall:
 
-🛠️Libraries Used
+Correctly identified 37 non-recommended movies and 18 recommended movies.
 
-The project was implemented using the following main libraries:
+Some trade-offs in misclassifications remain.
+
+
+
+🛠️ Libraries Used
 
 pandas → Data manipulation
 
@@ -83,13 +121,33 @@ scikit-learn → TF-IDF vectorization & evaluation metrics
 
 xgboost → Machine learning classifier
 
+fastapi → API framework
 
-⚙️Requirements
+uvicorn → ASGI server
 
-You can then install dependencies with:
+joblib → Model persistence
+
+
+⚙️ Installation & Setup
+
+Clone this repository
+
+Install dependencies:
 pip install -r requirements.txt
+
+
+Run FastAPI:
+
+uvicorn app2:app --reload
+
 
 
 📈 Future Improvements
 
-Deploy the recommendation engine with FastAPI/Streamlit.
+Deploy a frontend (Gradio/Streamlit) to interact with the API.
+
+Add movie posters & trailers to enrich the experience.
+
+Support user-based collaborative filtering.
+
+Deploy to cloud platforms (Render, Railway, AWS, etc.).
